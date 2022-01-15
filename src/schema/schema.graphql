@@ -1,0 +1,64 @@
+type Mutation {
+  signUp(data: userInput!): UserAuth!
+  newAuthor(data: authorInput!): Author!
+  newBook(data: bookInput!): ID!
+  addMyLibrery(user_id: ID!, book_id: ID!): ID!
+}
+
+type Query {
+  getUsers: [User]!
+  getAuthors: [Author]!
+  getBooks: [Book]!
+  getMyBooks(user_id: ID!): MyBooks!
+}
+
+type User {
+  id: ID!
+  full_name: String!
+  email: String!
+  pass: String!
+  status: Boolean
+}
+
+type UserAuth {
+  user: User!
+  token: String!
+}
+
+input userInput {
+  full_name: String!
+  email: String!
+  pass: String!
+  status: Boolean
+}
+
+type Author {
+  id: ID!
+  full_name: String!
+  country: String
+  status: Boolean
+}
+
+input authorInput {
+  full_name: String!
+  country: String!
+  status: Boolean
+}
+
+type Book {
+  id: ID!
+  title: String!
+  description: String!
+  author: Author!
+}
+
+input bookInput {
+  title: String!
+  description: String!
+  author_id: String!
+}
+
+type MyBooks {
+  user: User!
+  books: [Book]!
+}
